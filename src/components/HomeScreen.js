@@ -52,7 +52,6 @@ class HomeScreen extends Component {
 
   componentDidMount = () => {
     this.focusListener = this.props.navigation.addListener('focus', () => {
-      console.log("COMPONENT DID MOUNT, CALLING API");
       this.homeApi();
     });
   };
@@ -115,36 +114,32 @@ class HomeScreen extends Component {
     var data = new FormData();
     var that = this;
 
-    var config = {
-      method: 'get',
-      url: Apis.getAPIURL('sponsor/get'),
-      headers: {
-        Authorization: 'Bearer ' + global.loginUserAccessToken,
-        Accept: 'application/json',
-      },
-      data: data,
-    };
+    let api = 'sponsor/get';
     this.showLoading('sponsorButtonTapped');
-    axios(config)
-      .then(function (response) {
-        that.hideLoading('sponsorButtonTapped result');
+    Apis.callGetApis(api, ).then(
+      function (result) {
+        this.hideLoading('sponsor/get result');
         if (
-          response.data.status == true &&
-          response.data.sponsor_name != '' &&
-          response.data.sponsor_number != ''
+          result.status == true &&
+          result.sponsor_name != '' &&
+          result.sponsor_number != ''
         ) {
           that.setState( {
             showContactSponsorDialog: true,
-            sponsorName: response.data.sponsor_name,
-            sponsorNumber: response.data.sponsor_number,
+            sponsorName: result.sponsor_name,
+            sponsorNumber: result.sponsor_number,
           })
         } else {
           that.setState({showSetSponsorDialog: true});
         }
-      })
-      .catch(error => {
-       console.log(error);
-      });
+      }.bind(this),
+      function () {
+        this.hideLoading('sponsor/get bind result - 2');
+        let msg = 'There was an error fetching the sponsor data.';
+        console.log(msg);
+        FlashMsg.showError(msg);
+      }.bind(this),
+    );
   }
 
   sobrietyDateButtonTapped() {
@@ -184,7 +179,7 @@ class HomeScreen extends Component {
     console.log('Sending data for setSobrietyDate: ' + JSON.stringify(myData));
     this.showLoading('setSobrietyDate');
 
-    let apiEndpoint = 'page/sobriety-date/set';
+    let apiEndpoint = 'sobriety-date/set';
     Apis.callFormDataApis(apiEndpoint, null, myData).then(
       function (result) {
         console.log('Your data: ' + JSON.stringify(result));
@@ -223,8 +218,12 @@ class HomeScreen extends Component {
     this.setState({
       showSetSponsorDialog: false,
     });
+    console.log("closeSetSponsorDialog, action = " . action);
     if (action === 'ContactScreen') {
       this.props.navigation.navigate('ContactScreen');
+    }
+    if (action === 'AddSponsor') {
+      console.log("Add sponsor closed.")
     }
   };
 

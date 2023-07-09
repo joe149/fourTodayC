@@ -71,7 +71,7 @@ class SetFindMeetingURLDialog extends Component {
     };
     currentURLValue = props.currentURL;
     newURLValue = '';
-    console.log("SetFindMeetingURLDialog: url " +  props.currentURL + " close " + props.closeFunction);
+   // console.log("SetFindMeetingURLDialog: url " +  props.currentURL + " close " + props.closeFunction);
   }
 
   setFindMeetingURL = () => {
@@ -131,8 +131,9 @@ class SetFindMeetingURLDialog extends Component {
             <TouchableOpacity
                 onPress={() => {
                   this.state.closeFunction();
-                }}>
-              style={pagestyles.closeButton}>
+                }}
+               style={pagestyles.closeButton}
+              >
               <Image
                 source={require('../images/close.png')}
                 style={{width: 10, height: 10}}
@@ -187,7 +188,7 @@ class SetFindMeetingURLDialog extends Component {
               <TouchableOpacity
                 activeOpacity={0.5}
                 onPress={() => {
-                  this.state.closeFunction('SetDate', this.state.sobrietyDate);
+                  this.setFindMeetingURL();
                 }}>
                   <Text
                   style={{

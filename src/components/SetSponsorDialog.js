@@ -25,8 +25,8 @@ class SetSponsorDialog extends Component {
       addButtonDisabled: true,
       loading: false,
     };
-    this.homeApi();
-    console.log("Called with " + this.state.sponsorName);
+   // this.homeApi();
+    console.log("SetSponsorDialog called with " + this.state.sponsorName);
   }
 
   hideLoading(from) {
@@ -80,6 +80,36 @@ class SetSponsorDialog extends Component {
     );
   };
 
+  setSponsorAPI() {
+    console.log("setSponsorAPI -------------- to add new sponsor");
+    var that = this;
+    var user = this.state.currentUser;
+    var myData = JSON.stringify({
+      device_name: Platform.OS,
+      sponsor_name: this.state.sponsorName,
+      sponsor_number: this.state.sponsorNumber,
+      device_token: global.fcmToken,
+    });
+    let api = "sponsor/set";
+    Apis.callFormDataApis(api, null, myData).then (
+      function (result) {
+        this.setState({loading: false});
+        if (result.status == true) {
+          FlashMsg.showSuccess("Sponsor has been set");
+        } else {
+          FlashMsg.showError(result.message);
+        }
+        this.state.closeFunction("AddSponsor");
+      }.bind(this),
+      function () {
+        console.log("There was an error setting sponsor");
+        this.setState({loading: false});
+        FlashMsg.showError("There was an error setting sponsor");
+        this.state.closeFunction("AddSponsor");
+      }.bind(this)
+    );
+  ;} 
+
   nameUpdated = name => {
     this.setState({sponsorName: name});
     this.checkEnableAddButton();
@@ -96,7 +126,7 @@ class SetSponsorDialog extends Component {
     this.setState({addButtonDisabled: disable});
   };
 
-  submitIfValid = () => {
+  addNewSponsorIfValid = () => {
     const regex = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
     if (!regex.test(this.state.sponsorNumber)) {
       Alert.alert(
@@ -105,10 +135,10 @@ class SetSponsorDialog extends Component {
         [{text: 'OK'}],
       );
     } else {
-      this.state.closeFunction();
+      this.setSponsorAPI()
     }
   };
-
+  
   addButtonTextStyle = () => {
     if (this.state.addButtonDisabled) {
       return {
@@ -250,7 +280,7 @@ class SetSponsorDialog extends Component {
               <TouchableOpacity
                 style={{alignItems: 'center'}}
                 onPress={() => {
-                  this.submitIfValid();
+                  this.addNewSponsorIfValid();
                 }}
                 disabled={this.state.addButtonDisabled}
                 activeOpacity={1.0}>

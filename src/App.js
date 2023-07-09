@@ -8,7 +8,7 @@ import TabScreens from "./components/TabScreens";
 import LoginScreen from "./components/LoginScreen";
 import SignUpScreen from "./components/SignupScreen"
 // import PrivacyScreen from "./components/PrivacyScreen"
-// import ContactScreen from "./components/ContactScreen"
+ import ContactScreen from "./components/ContactScreen"
 // import SponsorScreen from "./components/SponsorScreen";
 // import PDFScreen from "./components/PDFScreen";
 // import BookmarkScreen from "./components/BookmarkScreen";
@@ -39,6 +39,13 @@ class App extends Component {
 			  	        component={TabScreens}             
 					    options={{ title: '4Today', headerShown: false }}
 				    />
+                    <Stack.Group screenOptions={{ presentation: 'modal' }}>
+                        <Stack.Screen
+                            name="ContactScreen"
+                            component={ContactScreen}
+                            options={{ title: '4Today', headerShown: false, headerBackVisible:false }}
+                        />
+                    </Stack.Group>
                 </Stack.Navigator>
             </NavigationContainer>
             <FlashMessage
