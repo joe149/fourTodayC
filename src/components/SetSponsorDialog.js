@@ -26,8 +26,12 @@ class SetSponsorDialog extends Component {
       loading: false,
     };
    // this.homeApi();
-    console.log("SetSponsorDialog called with " + this.state.sponsorName);
+   // console.log("SetSponsorDialog called with " + this.state.sponsorName);
   }
+
+  componentDidMount = () => {
+    this.homeApi();
+  };
 
   hideLoading(from) {
     console.log('hideLoading from ' + from);
@@ -168,11 +172,12 @@ class SetSponsorDialog extends Component {
       };
     }
   };
+//        {this.state.loading && <Loader />}
+
   render() {
     return (
       <Modal animationType="slide" transparent={true} onRequestClose={() => {}}>
         {/* Select Sponsor or Create New Contact */}
-        {this.state.loading && <Loader />}
         {this.state.showSetSponsorContact ? (
           <View style={pagestyles.centeredView}>
             <View style={pagestyles.modalView}>

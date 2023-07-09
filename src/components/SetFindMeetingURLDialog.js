@@ -62,18 +62,28 @@ const URLNotSet = () => {
   );
 };
 
+
 class SetFindMeetingURLDialog extends Component {
   constructor(props) {
     super(props);
     this.state = {
       closeFunction: props.closeFunction,
-      currentURL: props.currentURL,
     };
+    console.log("SetFindMeetingURLDialog was passed URL",props.currentURL);
     currentURLValue = props.currentURL;
     newURLValue = '';
    // console.log("SetFindMeetingURLDialog: url " +  props.currentURL + " close " + props.closeFunction);
   }
 
+  hideLoading(from) {
+    console.log('hideLoading from ' + from);
+    this.setState({loading: false});
+  }
+  showLoading(from) {
+    console.log('showLoading from ' + from);
+    this.setState({loading: true});
+  }
+ 
   setFindMeetingURL = () => {
     console.log('Called setFindMeetingURL, value is ' + newURLValue);
     if (newURLValue == '') {
@@ -164,7 +174,7 @@ class SetFindMeetingURLDialog extends Component {
               <TextInput
                  style={{
                     width: '79%',
-                    height: hp(4),
+                    height: hp(6),
                     backgroundColor: 'white',
                     justifyContent: 'center',
                     flexDirection: 'row',

@@ -7,11 +7,11 @@ import FlashMessage from "react-native-flash-message";
 import TabScreens from "./components/TabScreens";
 import LoginScreen from "./components/LoginScreen";
 import SignUpScreen from "./components/SignupScreen"
-// import PrivacyScreen from "./components/PrivacyScreen"
- import ContactScreen from "./components/ContactScreen"
-// import SponsorScreen from "./components/SponsorScreen";
-// import PDFScreen from "./components/PDFScreen";
-// import BookmarkScreen from "./components/BookmarkScreen";
+//import PrivacyScreen from "./components/PrivacyScreen"
+//import ContactScreen from "./components/ContactScreen"
+//import SponsorScreen from "./components/SponsorScreen";
+//import PDFScreen from "./components/PDFScreen";
+//import BookmarkScreen from "./components/BookmarkScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -34,18 +34,33 @@ class App extends Component {
                         component={SignUpScreen}
                         options={{ title: 'Sign Up for 4Today' }}
                     />
+                   {/* <Stack.Screen
+                        name="PrivacyScreen"
+                        component={PrivacyScreen}
+                        options={{ title: 'Privacy Policy' }}
+                    /> */}
                     <Stack.Screen
 			            name="TabScreens"
 			  	        component={TabScreens}             
 					    options={{ title: '4Today', headerShown: false }}
 				    />
-                    <Stack.Group screenOptions={{ presentation: 'modal' }}>
+                    {/* <Stack.Group screenOptions={{ presentation: 'modal' }}>
                         <Stack.Screen
                             name="ContactScreen"
                             component={ContactScreen}
                             options={{ title: '4Today', headerShown: false, headerBackVisible:false }}
                         />
-                    </Stack.Group>
+                        <Stack.Screen
+                          name="PDFScreen"
+                            component={PDFScreen}
+                            options={{ title: '', headerShown: false, headerBackVisible:false }}
+                        />
+                        <Stack.Screen
+                          name="BookmarkScreen"
+                            component={BookmarkScreen}
+                            options={{ title: 'Bookmarks', headerShown: false, headerBackVisible:false }}
+                        />
+                    </Stack.Group> */}
                 </Stack.Navigator>
             </NavigationContainer>
             <FlashMessage

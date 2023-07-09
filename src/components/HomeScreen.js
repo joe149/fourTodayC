@@ -157,6 +157,7 @@ class HomeScreen extends Component {
           that.setState({
             meetingUrl: result.data[0].url,
           });
+          console.log("FindMeeting list url result is ",this.state.meetingUrl);
           Linking.openURL('https://' + that.state.meetingUrl);
         } else {
           this.setState({
@@ -208,10 +209,11 @@ class HomeScreen extends Component {
     );
   };
 
-  closeSetURLDialog = () => {
+  closeSetURLDialog = (url) => {
     this.setState({
       showSetMeetingURLModal: false,
     });
+    this.set
   };
 
   closeSetSponsorDialog = action => {

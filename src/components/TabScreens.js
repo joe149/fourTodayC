@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from "./HomeScreen";
 //import LiteratureScreen from "./LiteratureScreen";
-//import SettingsScreensStack from "./SettingsScreensStack";
+import SettingsScreensStack from "./SettingsScreensStack";
 
 class TabScreens extends Component {
 
@@ -25,12 +25,12 @@ class TabScreens extends Component {
                         name="LiteratureScreen"
                         component={LiteratureScreen}
                         options={{ title: 'Literature', headerShown: false, headerBackVisible:false }}
-                    />
+                    /> */}
                     <Stack.Screen
                         name="SettingsScreensStack"
                         component={SettingsScreensStack}
                         options={{ title: 'Settings', headerShown: false, headerBackVisible:false }}
-                    /> */}
+                    /> 
                 </Tab.Navigator>
         )
     }
